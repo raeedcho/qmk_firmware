@@ -25,8 +25,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASEL] = KEYMAP(
   KC_ESC,   KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,       KC_O,   KC_P,       KC_MINS,    KC_BSPC,
   OSL(2),    KC_A,   KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,       KC_L,   KC_SCLN,    KC_QUOT,    KC_ENT,
-  KC_LSFT,  KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM,    KC_DOT, KC_SLSH,    KC_RSFT,
-  KC_LCTL,     KC_LALT,    KC_LGUI, OSL(1),     KC_SPC, OSL(3),  KC_RGUI,    OSL(2) ),
+  OSM(MOD_LSFT),  KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM,    KC_DOT, KC_SLSH,    OSM(MOD_RSFT),
+  OSM(MOD_LCTL),     OSM(MOD_LALT),    OSM(MOD_LGUI), OSL(1),     KC_SPC, OSL(3),  OSM(MOD_RGUI),    OSL(2) ),
 [_NUML] = KEYMAP(
   KC_TAB,   ____, KC_BTN2,   KC_MS_U,   KC_BTN1,   ____,   ____,   KC_7,  KC_8,      KC_9,  KC_PLUS,   KC_MINS,   ____,
   ____,     ____, KC_MS_L,   KC_MS_D,   KC_MS_R,   KC_LBRC,KC_RBRC,KC_4,  KC_5,      KC_6,  KC_ASTR,   KC_EQL,    ____,
