@@ -23,12 +23,12 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASEL] = KEYMAP(
-  KC_ESC,   KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,       KC_O,   KC_P,       KC_MINS,    KC_BSPC,
+  KC_TAB,   KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,       KC_O,   KC_P,       KC_MINS,    KC_BSPC,
   OSL(2),    KC_A,   KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,       KC_L,   KC_SCLN,    KC_QUOT,    KC_ENT,
   OSM(MOD_LSFT),  KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM,    KC_DOT, KC_SLSH,    OSM(MOD_RSFT),
   OSM(MOD_LCTL),     OSM(MOD_LALT),    OSM(MOD_LGUI), OSL(1),     KC_SPC, OSL(3),  OSM(MOD_RGUI),    OSL(2) ),
 [_NUML] = KEYMAP(
-  KC_TAB,   ____, KC_BTN2,   KC_MS_U,   KC_BTN1,   ____,   ____,   KC_7,  KC_8,      KC_9,  KC_PLUS,   KC_MINS,   ____,
+  KC_ESC,   ____, KC_BTN2,   KC_MS_U,   KC_BTN1,   ____,   ____,   KC_7,  KC_8,      KC_9,  KC_PLUS,   KC_MINS,   ____,
   ____,     ____, KC_MS_L,   KC_MS_D,   KC_MS_R,   KC_LBRC,KC_RBRC,KC_4,  KC_5,      KC_6,  KC_ASTR,   KC_EQL,    ____,
   ____,     ____,   ____,   ____,   KC_BTN3,   ____,   ____,   KC_1,  KC_2,      KC_3,  ____,      ____,
   ____,     ____,   ____,   ____,   KC_0,   ____,   ____,   ____ ),
@@ -38,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ____, KC_MENU, KC_MPRV, KC_MPLY, KC_MNXT, KC_HOME, KC_END,    ____,    ____,    ____, KC_BSLS, ____,
   ____,     ____,   ____,   ____,   ____,   ____,   ____,   ____ ),
 [_WSPACEL] = KEYMAP(
-  ____,   ____, ____,   ____,   ____,   ____,   ____,   LGUI(KC_7),  LGUI(KC_8),      LGUI(KC_9),  ____,   ____,   ____,
+  KC_TILD,   ____, ____,   ____,   ____,   ____,   ____,   LGUI(KC_7),  LGUI(KC_8),      LGUI(KC_9),  ____,   ____,   ____,
   ____,     ____, ____,   ____,   ____,   ____,____,LGUI(KC_4),  LGUI(KC_5),      LGUI(KC_6),  ____,   ____,    ____,
   ____,     ____,   ____,   ____,   ____,   ____,   ____,   LGUI(KC_1),  LGUI(KC_2),      LGUI(KC_3),  ____,      ____,
   ____,     ____,   ____,   ____,   LGUI(KC_0),   ____,   ____,   ____ ),
