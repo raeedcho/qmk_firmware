@@ -20,13 +20,14 @@
 #define _NUML 1
 #define _MOVEL 2
 #define _WSPACEL 3
+#define _GAMEL 4
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_BASEL] = KEYMAP(
   KC_TAB,   KC_Q,   KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,       KC_O,   KC_P,       KC_MINS,    KC_BSPC,
-  OSL(2),    KC_A,   KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,       KC_L,   KC_SCLN,    KC_QUOT,    KC_ENT,
+  OSL(_MOVEL),    KC_A,   KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,       KC_L,   KC_SCLN,    KC_QUOT,    KC_ENT,
   OSM(MOD_LSFT),  KC_Z,   KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM,    KC_DOT, KC_SLSH,    OSM(MOD_RSFT),
-  OSM(MOD_LCTL),     OSM(MOD_LALT),    OSM(MOD_LGUI), OSL(1),     KC_SPC, OSL(3),  OSM(MOD_RGUI),    OSL(2) ),
+  OSM(MOD_LCTL),     OSM(MOD_LALT),    OSM(MOD_LGUI), OSL(_NUML),     KC_SPC, OSL(_WSPACEL),  TT(_GAMEL),    OSL(_MOVEL) ),
 [_NUML] = KEYMAP(
   KC_ESC,   ____, KC_BTN2,   KC_MS_U,   KC_BTN1,   ____,   ____,   KC_7,  KC_8,      KC_9,  KC_PLUS,   KC_MINS,   ____,
   ____,     ____, KC_MS_L,   KC_MS_D,   KC_MS_R,   KC_LBRC,KC_RBRC,KC_4,  KC_5,      KC_6,  KC_ASTR,   KC_EQL,    ____,
@@ -42,6 +43,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ____,     KC_F5, KC_F6,   KC_F7,   KC_F8,   ____,____,LGUI(KC_4),  LGUI(KC_5),      LGUI(KC_6),  ____,   ____,    ____,
   ____,     KC_F1,   KC_F2,   KC_F3,   KC_F4,   ____,   ____,   LGUI(KC_1),  LGUI(KC_2),      LGUI(KC_3),  ____,      ____,
   ____,     ____,   ____,   ____,   LGUI(KC_0),   ____,   ____,   ____ ),
+[_GAMEL] = KEYMAP(
+  ____,   ____,  ____,  ____,   ____,   ____,  ____,  ____,  ____,  ____,  ____,  ____,  ____,
+  ____,   ____,  ____,  ____,   ____,   ____,  ____,  ____,  ____,  ____,  ____,  ____,  ____,
+  ____,   ____,  ____,  ____,   ____,   ____,  ____,  ____,  ____,  ____,  ____,  ____,
+  ____,   ____,  ____,  KC_SPC,   ____,   ____,  ____,  ____ ),
 };
 
 const uint16_t PROGMEM fn_actions[] = {
