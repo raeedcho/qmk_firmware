@@ -39,8 +39,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ____, KC_MENU, KC_MPRV, KC_MPLY, KC_MNXT, KC_HOME, KC_END,    ____,    ____,    ____, KC_BSLS, ____,
   ____,     ____,   ____,   ____,   ____,   ____,   ____,   ____ ),
 [_WSPACEL] = KEYMAP(
-  KC_TILD,   KC_F9, KC_F10,   KC_F11,   KC_F12,   ____,   ____,   LGUI(KC_7),  LGUI(KC_8),      LGUI(KC_9),  ____,   ____,   ____,
-  ____,     KC_F5, KC_F6,   KC_F7,   KC_F8,   ____,____,LGUI(KC_4),  LGUI(KC_5),      LGUI(KC_6),  ____,   ____,    ____,
+  KC_TILD,   KC_F9, KC_F10,   KC_F11,   KC_F12,   ____,   ____,   LGUI(KC_7),  LGUI(KC_8),      LGUI(KC_9),  LGUI(KC_MINS),   ____,   ____,
+  ____,     KC_F5, KC_F6,   KC_F7,   KC_F8,   ____,____,LGUI(KC_4),  LGUI(KC_5),      LGUI(KC_6),  LGUI(KC_B),   ____,    ____,
   ____,     KC_F1,   KC_F2,   KC_F3,   KC_F4,   ____,   ____,   LGUI(KC_1),  LGUI(KC_2),      LGUI(KC_3),  ____,      ____,
   ____,     ____,   ____,   ____,   LGUI(KC_0),   ____,   ____,   ____ ),
 [_GAMEL] = KEYMAP(
@@ -57,15 +57,6 @@ const uint16_t PROGMEM fn_actions[] = {
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   // MACRODOWN only works in this function
-      switch(id) {
-        case 0:
-          if (record->event.pressed) {
-            register_code(KC_RSFT);
-          } else {
-            unregister_code(KC_RSFT);
-          }
-        break;
-      }
     return MACRO_NONE;
 };
 

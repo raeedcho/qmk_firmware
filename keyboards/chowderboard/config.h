@@ -1,5 +1,5 @@
 /*
-Copyright 2017 REPLACE_WITH_YOUR_NAME
+Copyright 2017 Raeed Chowdhury
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -148,6 +148,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* disable debug print */
 //#define NO_DEBUG
+#ifndef DEBUG_ACTION
+#define DEBUG_ACTION
+#endif
 
 /* disable print */
 //#define NO_PRINT
@@ -181,5 +184,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* override number of MIDI tone keycodes (each octave adds 12 keycodes and allocates 12 bytes) */
 //#define MIDI_TONE_KEYCODE_OCTAVES 1
+
+/* One shot options */
+//#define ONESHOT_TAP_TOGGLE 5
+#define ONESHOT_TIMEOUT 500
 
 #endif
