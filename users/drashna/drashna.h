@@ -1,114 +1,101 @@
-/*
-Copyright 2017 Christopher Courtney <drashna@live.com> @drashna
+// Copyright 2020 Christopher Courtney, aka Drashna Jael're  (@drashna) <drashna@live.com>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-(at your option) any later version.
+#pragma once
+#include QMK_KEYBOARD_H
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
-
-#ifndef USERSPACE
-#define USERSPACE
-
-#include "quantum.h"
-#include "song_list.h"
-
-// Define layer names 
-#define _QWERTY 0
-#define _NUMLOCK 0
-#define _COLEMAK 1
-#define _DVORAK 2
-#define _WORKMAN 3
-#define _NAV 5
-#define _COVECUBE 6
-#define _SYMB 8
-#define _OVERWATCH 9
-#define _DIABLO 10
-#define _MOUS 11
-#define _MACROS 12
-#define _MEDIA 13
-#define _LOWER 14
-#define _RAISE 15
-#define _ADJUST 16
-
-
-//define modifiers
-#define MODS_SHIFT_MASK  (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
-#define MODS_CTRL_MASK  (MOD_BIT(KC_LCTL)|MOD_BIT(KC_RCTRL))
-#define MODS_ALT_MASK  (MOD_BIT(KC_LALT)|MOD_BIT(KC_RALT))
-#define MODS_GUI_MASK  (MOD_BIT(KC_LGUI)|MOD_BIT(KC_RGUI))
-
-#ifdef RGBLIGHT_ENABLE
-#define rgblight_set_blue        rgblight_sethsv (0xFF,  0xFF, 0xFF);
-#define rgblight_set_red         rgblight_sethsv (0x00,  0xFF, 0xFF);
-#define rgblight_set_green       rgblight_sethsv (0x78,  0xFF, 0xFF);
-#define rgblight_set_orange      rgblight_sethsv (0x1E,  0xFF, 0xFF);
-#define rgblight_set_teal        rgblight_sethsv (0xC3,  0xFF, 0xFF);
-#define rgblight_set_magenta     rgblight_sethsv (0x12C, 0xFF, 0xFF);
-#define rgblight_set_yellow      rgblight_sethsv (0x3C,  0xFF, 0xFF);
-#define rgblight_set_purple      rgblight_sethsv (0x10E, 0xFF, 0xFF);
-#endif
-
-extern bool is_overwatch;
-extern bool rgb_layer_change;
-
-enum userrpace_custom_keycodes {
-  PLACEHOLDER = SAFE_RANGE, // can always be here
-  EPRM,
-  VRSN,
-  KC_QWERTY,
-  KC_COLEMAK,
-  KC_DVORAK,
-  KC_WORKMAN,
-  LOWER,
-  RAISE,
-  ADJUST,
-  KC_DIABLO_CLEAR,
-  KC_OVERWATCH,
-  KC_SALT,
-  KC_MORESALT,
-  KC_SALTHARD,
-  KC_GOODGAME,
-  KC_SYMM,
-  KC_JUSTGAME,
-  KC_GLHF,
-  KC_TORB,
-  KC_AIM,
-  KC_C9,
-  KC_GGEZ,
-  KC_MAKE,
-  KC_RESET,
-  KC_RGB_T,
-  KC_SECRET_1,
-  KC_SECRET_2,
-  KC_SECRET_3,
-  KC_SECRET_4,
-  KC_SECRET_5,
-  NEW_SAFE_RANGE //use "NEWPLACEHOLDER for keymap specific codes
-};
+#include "eeprom.h"
+#include "keyrecords/wrappers.h"
+#include "keyrecords/process_records.h"
+#include "callbacks.h"
 
 #ifdef TAP_DANCE_ENABLE
-enum {
-  TD_D3_1 = 0,
-  TD_D3_2,
-  TD_D3_3,
-  TD_D3_4
+#    include "keyrecords/tap_dances.h"
+#endif // TAP_DANCE_ENABLE
+#if defined(RGBLIGHT_ENABLE)
+#    include "rgb/rgb_stuff.h"
+#endif
+#if defined(RGB_MATRIX_ENABLE)
+#    include "rgb/rgb_matrix_stuff.h"
+#endif
+#if defined(OLED_ENABLE)
+#    include "oled/oled_stuff.h"
+#endif
+#ifdef SPLIT_KEYBOARD
+#    include "split/transport_sync.h"
+#endif
+#ifdef POINTING_DEVICE_ENABLE
+#    include "pointing/pointing.h"
+#endif
+#ifdef OS_DETECTION_ENABLE
+#    include "os_detection.h"
+#endif
+
+/* Define layer names */
+enum userspace_layers {
+    _QWERTY             = 0,
+    _NUMLOCK            = 0,
+    FIRST_DEFAULT_LAYER = 0,
+    _COLEMAK_DH,
+    _COLEMAK,
+    _DVORAK,
+    LAST_DEFAULT_LAYER = _DVORAK,
+    _GAMEPAD,
+    _DIABLO,
+    _DIABLOII,
+    _MOUSE,
+    _MEDIA,
+    _LOWER,
+    _RAISE,
+    _ADJUST,
 };
+
+#define _MACROS _MOUSE
+#define _DEFAULT_LAYER_1 FIRST_DEFAULT_LAYER
+#define _DEFAULT_LAYER_2 (FIRST_DEFAULT_LAYER + 1)
+#define _DEFAULT_LAYER_3 (FIRST_DEFAULT_LAYER + 2)
+#define _DEFAULT_LAYER_4 (FIRST_DEFAULT_LAYER + 3)
+#if LAST_DEFAULT_LAYER > (FIRST_DEFAULT_LAYER + 3)
+#    define _DEFAULT_LAYER_2 (FIRST_DEFAULT_LAYER + 4)
+#    define _DEFAULT_LAYER_3 (FIRST_DEFAULT_LAYER + 5)
+#    define _DEFAULT_LAYER_4 (FIRST_DEFAULT_LAYER + 6)
+#    define _DEFAULT_LAYER_2 (FIRST_DEFAULT_LAYER + 7)
+#    if LAST_DEFAULT_LAYER > (FIRST_DEFAULT_LAYER + 7)
+#        define _DEFAULT_LAYER_2 (FIRST_DEFAULT_LAYER + 8)
+#        define _DEFAULT_LAYER_3 (FIRST_DEFAULT_LAYER + 9)
+#        define _DEFAULT_LAYER_4 (FIRST_DEFAULT_LAYER + 10)
+#        define _DEFAULT_LAYER_4 (FIRST_DEFAULT_LAYER + 11)
+#    endif
 #endif
 
+#define DEFAULT_LAYER_1_HSV HSV_CYAN
+#define DEFAULT_LAYER_2_HSV HSV_CHARTREUSE
+#define DEFAULT_LAYER_3_HSV HSV_MAGENTA
+#define DEFAULT_LAYER_4_HSV HSV_GOLDENROD
 
-#define QMK_KEYS_PER_SCAN 4
+#define DEFAULT_LAYER_1_RGB RGB_CYAN
+#define DEFAULT_LAYER_2_RGB RGB_CHARTREUSE
+#define DEFAULT_LAYER_3_RGB RGB_MAGENTA
+#define DEFAULT_LAYER_4_RGB RGB_GOLDENROD
 
-#ifdef RGBLIGHT_ENABLE
-#define RGBLIGHT_SLEEP
-#endif
+bool mod_key_press_timer(uint16_t code, uint16_t mod_code, bool pressed);
+bool mod_key_press(uint16_t code, uint16_t mod_code, bool pressed, uint16_t this_timer);
+bool hasAllBitsInMask(uint8_t value, uint8_t mask);
+void tap_code16_nomods(uint16_t kc);
+void format_layer_bitmap_string(char* buffer, layer_state_t state, layer_state_t default_state);
 
-#endif
+// clang-format off
+typedef union {
+    uint32_t raw;
+    struct {
+        bool    rgb_layer_change     :1;
+        bool    is_overwatch         :1;
+        bool    nuke_switch          :1;
+        bool    swapped_numbers      :1;
+        bool    rgb_matrix_idle_anim :1;
+        bool    autocorrection       :1;
+    };
+} userspace_config_t;
+// clang-format on
+
+extern userspace_config_t userspace_config;

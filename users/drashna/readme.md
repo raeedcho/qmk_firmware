@@ -1,14 +1,17 @@
-Copyright 2017 Christopher Courtney <drashna@live.com> @drashna
+# Overview
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-(at your option) any later version.
+This is my personal userspace file.  Most of my code exists here, as it's heavily shared.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+* [Callback (keymap+misc)](callbacks.md)
+* [Keycode Handling](keyrecords/readme.md)
+  * [Autocorrection](keyrecords/autocorrection/readme.md)
+  * [Cap Words](keyrecords/capwords.md)
+  * [Diablo Tap Dancing](keyrecords/tap_dance.md)
+  * [Keymap Wrappers](keyrecords/wrappers.md)
+  * [Secret Macros](keyrecords/secrets.md)
+  * [Custom Keycodes](keyrecords/keycodes.md)
+  * [Unicode Input](keyrecords/unicode.md)
+* [OLED Display](oled/readme.md)
+* [Pointing Devices](pointing/readme.md)
+* [RGB Customization](rgb/readme.md)
+* [Split Transport](split/readme.md)

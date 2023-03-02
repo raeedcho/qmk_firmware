@@ -21,14 +21,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <stdint.h>
 #include <stdbool.h>
-#include <util/delay.h>
+#include "wait.h"
 #include "print.h"
 #include "debug.h"
 #include "util.h"
 #include "timer.h"
 #include "matrix.h"
 #include "led.h"
-// #include "fc980c.h"
+#include "avr/timer_avr.h"
+// #include QMK_KEYBOARD_H
 
 
 // Timer resolution check
@@ -85,15 +86,6 @@ static matrix_row_t _matrix0[MATRIX_ROWS];
 static matrix_row_t _matrix1[MATRIX_ROWS];
 
 
-__attribute__ ((weak))
-void matrix_init_quantum(void) {
-    matrix_init_kb();
-}
-
-__attribute__ ((weak))
-void matrix_scan_quantum(void) {
-    matrix_scan_kb();
-}
 
 __attribute__ ((weak))
 void matrix_init_kb(void) {
@@ -130,7 +122,7 @@ void matrix_init(void)
     for (uint8_t i=0; i < MATRIX_ROWS; i++) _matrix1[i] = 0x00;
     matrix = _matrix0;
     matrix_prev = _matrix1;
-    matrix_init_quantum();
+    matrix_init_kb();
 }
 
 uint8_t matrix_scan(void)
@@ -190,7 +182,7 @@ uint8_t matrix_scan(void)
             matrix_last_modified = timer_read32();
         }
     }
-    matrix_scan_quantum();
+    matrix_scan_kb();
     return 1;
 }
 
